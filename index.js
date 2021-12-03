@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 // app.use('/api', createProxyMiddleware({ target: 'http://www.example.org', changeOrigin: true }));
 
 app.all("/bsiSandbox", (req, res) => {
-  console.log(typeof req.body);
+  // console.log(typeof req.body);
 
   fetch("https://sandbox.api.bpi.co.id/ext/bnis/?fungsi=vabilling", {
     method: "POST",
@@ -28,9 +28,27 @@ app.all("/bsiSandbox", (req, res) => {
 });
 
 app.all("/bsiProd", (req, res) => {
-  console.log(typeof req.body);
+  // console.log(typeof req.body);
 
   fetch("https://api.bpi.co.id/ext/bnis/?fungsi=vabilling", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(req.body),
+  })
+    .then((result) => result.json())
+    .then((result) => {
+      console.log(result);
+      res.send(result);
+    })
+    .catch((err) => res.status(500).send(err));
+});
+
+app.all("/billing", (req, res) => {
+  // console.log(typeof req.body);
+
+  fetch("http://billing.alwildan3bsd.sch.id/api/v1/invoice/bsi", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
