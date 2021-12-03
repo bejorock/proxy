@@ -45,10 +45,28 @@ app.all("/bsiProd", (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
-app.all("/billing", (req, res) => {
+app.all("/billingProd", (req, res) => {
   // console.log(typeof req.body);
 
   fetch("http://billing.alwildan3bsd.sch.id/api/v1/invoice/bsi", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(req.body),
+  })
+    .then((result) => result.json())
+    .then((result) => {
+      console.log(result);
+      res.send(result);
+    })
+    .catch((err) => res.status(500).send(err));
+});
+
+app.all("/billingSandbox", (req, res) => {
+  // console.log(typeof req.body);
+
+  fetch("http://billing-sandbox.alwildan3bsd.sch.id/api/v1/invoice/bsi", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
