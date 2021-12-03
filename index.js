@@ -66,7 +66,7 @@ app.all("/billingProd", (req, res) => {
 app.all("/billingSandbox", (req, res) => {
   // console.log(typeof req.body);
 
-  fetch("http://billing-sandbox.alwildan3bsd.sch.id/api/v1/invoice/bsi", {
+  fetch("http://billing-test.alwildan3bsd.sch.id/api/v1/invoice/bsi", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
